@@ -1,24 +1,95 @@
 {
   "name": "gherkin-io",
-  "version": "0.0.1",
-  "description": "API to handle IO of Gherkin AST(s) and feature file(s)",
+  "version": "0.1.0",
+  "description": "Tool to read/write GHerkin feature files and work with Gherking AST",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run clean && npm run compile && npm run copyToDist && npm test -- --coverage && npm run typedoc",
+    "buildUpdate": "npm run compile && npm run copyToDist && npm run postbuild",
+    "copyToDist": "copyfiles -f *.txt *.md package.json dist",
+    "typedoc": "typedoc --mode file --exclude **/bin/**/*.ts --exclude **/cli.ts --out ./docs ./src && touch ./docs/.nojekyll",
+    "clean": "rimraf ./dist ./docs",
+    "test": "jest --coverage",
+    "tslint": "tslint -c tslint.json ./src/**/*.ts ./tests/**/*.ts",
+    "compile": "tsc && npm run tslint",
+    "publish": "npm run build && npm public ./dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/szikszail/gherkin-io.git"
+    "url": "git+https://github.com/gherking/gherkin-io.git"
   },
   "keywords": [
-    "gherkin",
-    "feature",
-    "file"
+    "Gherkin",
+    "Feature",
+    "Scenario",
+    "Scenario",
+    "Outline",
+    "Background",
+    "Step",
+    "Examples"
   ],
-  "author": "Laszlo Szikszai <sziklaszlo@gmail.com>",
+  "author": "Team GherKing",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/szikszail/gherkin-io/issues"
+  "contributors": [
+    "Laszlo Szikszai <sziklaszlo@gmail.com>"
+  ],
+  "files": [
+    "*.js",
+    "*.d.ts",
+    "*.js.map"
+  ],
+  "engines": {
+    "node": ">=6.0.0"
   },
-  "homepage": "https://github.com/szikszail/gherkin-io#readme"
+  "bugs": {
+    "url": "https://github.com/gherking/gherkin-io/issues"
+  },
+  "homepage": "https://github.com/gherking/gherkin-io#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.0.10",
+    "copyfiles": "^2.1.0",
+    "jest": "^24.8.0",
+    "jest-junit": "^6.4.0",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "gherkin": "^6.0.17",
+    "gherkin-ast": "^2.0.0",
+    "glob": "^7.1.4"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "dist"
+    ],
+    "coverageDirectory": "./coverage",
+    "collectCoverageFrom": [
+      "./src/**/*.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 85,
+        "functions": 85,
+        "lines": 85,
+        "statements": 85
+      }
+    }
+  }
 }
