@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "gherkin": "^6.0.17",
-    "gherkin-ast": "^2.0.0",
+    "gherkin-ast": "^2.0.1",
     "glob": "^7.1.4"
   },
   "jest": {

@@ -1493,10 +1493,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-gherkin-ast@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/gherkin-ast/-/gherkin-ast-2.0.0.tgz#1a79bfed7a9ec3073fa5ef5e190b0a86293ad4c9"
-  integrity sha512-NWg5TVLGLAD4ODbz/gkiwvUcbSmK/tiFpreQzjzX/fOj56pFg3DkcBEPWNk52GIp5D+1yfyDU0QqbvD4RGA/oA==
+gherkin-ast@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/gherkin-ast/-/gherkin-ast-2.0.1.tgz#0c0bf6d3566da4d22ff87628b4ec919c1049fe0c"
+  integrity sha512-fY0GvmmcmAFDLqeUK/slc6l/y9gXMQ0714NVuOXJSzm6wInIiTBs+/OPiogd+NCXRXrjpdh8c1vKeB/xdc6h5w==
   dependencies:
     cli-table3 "^0.5.1"
     colors "^1.3.3"

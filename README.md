@@ -10,7 +10,9 @@ Tool to read/write GHerkin feature files and work with Gherking AST
 
 The `read` function can be used to parse feature file(s) to [AST](https://github.com/gherking/gherkin-ast).
 
-`read(pattern: string): Promise<Document[]>`
+```typescript
+read(pattern: string): Promise<Document[]>
+```
 
 In TypeScript:
 ```typescript
@@ -30,7 +32,9 @@ const documents = await read("./features/*.feature");
 
 The `write` function can be used to write an AST to a feature file.
 
-`write(filePath: string, document: Document, options?: FormatterOptions): Promise<void>`
+```typescript
+write(filePath: string, document: Document, options?: FormatterOptions): Promise<void>
+```
 
 In TypeScript:
 ```typescript
