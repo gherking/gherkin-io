@@ -16,8 +16,7 @@ read(pattern: string): Promise<Document[]>
 
 In TypeScript:
 ```typescript
-import {read} from "gherkin-io";
-import {Document} from "gherkin-ast";
+import {read, Document} from "gherkin-io";
 
 const documents: Document[] = await read("./features/*.feature");
 ```
@@ -38,8 +37,7 @@ write(filePath: string, document: Document, options?: FormatterOptions): Promise
 
 In TypeScript:
 ```typescript
-import {write, FormatterOptions} from "gherkin-io";
-import {Document} from "gherkin-ast";
+import {Document, write, FormatterOptions} from "gherkin-io";
 const document: Document = new Document(/*...*/);
 const options: FormatterOptions = {/*...*/};
 await write("./test.feature", document, options);
@@ -47,8 +45,7 @@ await write("./test.feature", document, options);
 
 In JavaScript:
 ```javascript
-const {write} = require("gherkin-io");
-const {Document} = require("gherkin-ast")
+const {write, Document} = require("gherkin-io");
 const document = new Document(/*...*/);
 const options = {/*...*/};
 await write("./test.feature", document, options);
@@ -56,4 +53,4 @@ await write("./test.feature", document, options);
 
 `FormatterOptions` is re-exported from [gherkin-formatter](https://github.com/gherking/gherkin-formatter).
 
-For detailed documentation see the [TypeDocs documentation](https://gherking.github.io/ts-seed/).
+For detailed documentation see the [TypeDocs documentation](https://gherking.github.io/gherkin-io/).

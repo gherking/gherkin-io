@@ -1,6 +1,6 @@
 {
   "name": "gherkin-io",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Tool to read/write GHerkin feature files and work with Gherking AST",
   "main": "index.js",
   "types": "index.d.ts",
@@ -59,8 +59,10 @@
     "typescript": "^3.5.2"
   },
   "dependencies": {
+    "fs-extra": "^8.1.0",
     "gherkin": "^6.0.17",
     "gherkin-ast": "^2.0.1",
+    "gherkin-formatter": "^0.1.0",
     "glob": "^7.1.4"
   },
   "jest": {
