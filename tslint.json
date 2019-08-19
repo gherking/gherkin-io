@@ -28,14 +28,6 @@
       true,
       2
     ],
-    "whitespace": [
-      true,
-      "check-branch",
-      "check-operator",
-      "check-decl",
-      "check-module",
-      "check-type",
-      "check-preblock"
-    ]
+    "whitespace": true
   }
 }
