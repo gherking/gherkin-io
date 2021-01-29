@@ -1,5 +1,5 @@
 import { writeFile } from "fs-extra";
-import { fromPaths } from "gherkin";
+import gherkin from "gherkin";
 import { Document, GherkinDocument } from "gherkin-ast";
 import { format, FormatOptions } from "gherkin-formatter";
 import { sync } from "glob";
@@ -11,7 +11,7 @@ export { Document } from "gherkin-ast";
 
 const readFile = (path: string): Promise<GherkinDocument> => {
     return new Promise<GherkinDocument>((fulfill, reject) => {
-        const stream: Readable = fromPaths([path], {
+        const stream: Readable = gherkin.fromPaths([path], {
             includeGherkinDocument: true,
             includePickles: false,
             includeSource: false,
@@ -19,7 +19,7 @@ const readFile = (path: string): Promise<GherkinDocument> => {
         stream.on("data", fulfill);
         stream.on("error", reject);
     });
-}
+};
 
 export const read = async (pattern: string): Promise<Document[]> => {
     if (!pattern) {
@@ -43,7 +43,7 @@ export const read = async (pattern: string): Promise<Document[]> => {
         }
     }
     return documents;
-}
+};
 
 export const write = async (filePath: string, document: Document, options?: FormatOptions): Promise<void> => {
     if (!filePath) {

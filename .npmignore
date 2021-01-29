@@ -1,8 +1,0 @@
-/node_modules
-.idea
-.vscode
-*.log
-yarn.lock
-package-lock.json
-/coverage
-/tests

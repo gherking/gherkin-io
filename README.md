@@ -1,6 +1,10 @@
 # gherkin-io
 
-[![Build Status](https://travis-ci.org/gherking/gherkin-io.svg?branch=master)](https://travis-ci.org/gherking/gherkin-io) [![dependency Status](https://david-dm.org/gherking/gherkin-io.svg)](https://david-dm.org/gherking/gherkin-io) [![devDependency Status](https://david-dm.org/gherking/gherkin-io/dev-status.svg)](https://david-dm.org/gherking/gherkin-io#info=devDependencies)
+![Downloads](https://img.shields.io/npm/dw/gherkin-io?style=flat-square)
+![Version@npm](https://img.shields.io/npm/v/gherkin-io?label=version%40npm&style=flat-square)
+![Version@git](https://img.shields.io/github/package-json/v/gherking/gherkin-io/master?label=version%40git&style=flat-square)
+![CI](https://img.shields.io/github/workflow/status/gherking/gherkin-io/CI/master?label=ci&style=flat-square)
+![Docs](https://img.shields.io/github/workflow/status/gherking/gherkin-io/Docs/master?label=docs&style=flat-square)
 
 Tool to read/write GHerkin feature files and work with Gherking AST
 
@@ -8,7 +12,7 @@ Tool to read/write GHerkin feature files and work with Gherking AST
 
 ### Read feature files
 
-The `read` function can be used to parse feature file(s) to [AST](https://github.com/gherking/gherkin-ast).
+The `read` function can be used to parse feature file(s) to [AST](https://github.com/gherking/gherkin-io).
 
 ```typescript
 read(pattern: string): Promise<Document[]>

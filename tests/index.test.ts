@@ -4,25 +4,13 @@ import { Document, FormatOptions, read, write } from "../src";
 
 describe("gherkin-io", () => {
     describe("read", () => {
-        test("should handle missing pattern", async (done) => {
-            try {
-                // @ts-ignore
-                await read();
-                done.fail("Did not throw!");
-            } catch (e) {
-                expect(String(e)).toContain("pattern must be set");
-                done();
-            }
+        test("should handle missing pattern", async () => {
+            // @ts-ignore
+            await expect (read()).rejects.toThrow("[gherkin-io] [read] pattern must be set!");
         });
 
-        test("should handle if no match for pattern", async (done) => {
-            try {
-                await read("no-file-match");
-                done.fail("Did not throw!");
-            } catch (e) {
-                expect(String(e)).toContain("No matching file");
-                done();
-            }
+        test("should handle if no match for pattern", async () => {
+            await expect (read("no-file-match")).rejects.toThrow("[gherkin-io] [read] No matching files for the given pattern: no-file-match");
         });
 
         test("should parse feature files", async () => {
@@ -41,26 +29,14 @@ describe("gherkin-io", () => {
     });
 
     describe("write", () => {
-        test("should handle missing path", async (done) => {
-            try {
-                // @ts-ignore
-                await write();
-                done.fail("Did not throw!");
-            } catch (e) {
-                expect(String(e)).toContain("path must be set");
-                done();
-            }
+        test("should handle missing path", async () => {
+            // @ts-ignore
+            await expect (write()).rejects.toThrow("[gherkin-io] [write] path must be set!");
         });
 
-        test("should handle missing document", async (done) => {
-            try {
-                // @ts-ignore
-                await write("path");
-                done.fail("Did not throw!");
-            } catch (e) {
-                expect(String(e)).toContain("document must be set");
-                done();
-            }
+        test("should handle missing document", async () => {
+            // @ts-ignore
+            await expect (write("path")).rejects.toThrow("[gherkin-io] [write] document must be set!");
         });
 
         test("should write feature file", async () => {

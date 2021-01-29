@@ -4,4 +4,6 @@
 
 ### Added
 
-* Create package
+* Created package
+* Added implementation
+* Added CI
