@@ -15,6 +15,7 @@ describe("gherkin-io", () => {
 
         test("should parse feature files", async () => {
             const documents: Document[] = await read("**/test*.feature");
+            console.log(documents[0].feature.elements);
             expect(documents).toHaveLength(2);
             expect(documents[0].uri).toContain("test.feature");
             expect(documents[1].uri).toContain("test2.feature");
