@@ -6,16 +6,15 @@ describe("gherkin-io", () => {
     describe("read", () => {
         test("should handle missing pattern", async () => {
             // @ts-ignore
-            await expect (read()).rejects.toThrow("[gherkin-io] [read] pattern must be set!");
+            await expect (read()).rejects.toThrow("Pattern must be set!");
         });
 
         test("should handle if no match for pattern", async () => {
-            await expect (read("no-file-match")).rejects.toThrow("[gherkin-io] [read] No matching files for the given pattern: no-file-match");
+            await expect (read("no-file-match")).rejects.toThrow("No matching files for the given pattern: no-file-match");
         });
 
         test("should parse feature files", async () => {
             const documents: Document[] = await read("**/test*.feature");
-            console.log(documents[0].feature.elements);
             expect(documents).toHaveLength(2);
             expect(documents[0].uri).toContain("test.feature");
             expect(documents[1].uri).toContain("test2.feature");
@@ -32,12 +31,12 @@ describe("gherkin-io", () => {
     describe("write", () => {
         test("should handle missing path", async () => {
             // @ts-ignore
-            await expect (write()).rejects.toThrow("[gherkin-io] [write] path must be set!");
+            await expect (write()).rejects.toThrow("Path must be set!");
         });
 
         test("should handle missing document", async () => {
             // @ts-ignore
-            await expect (write("path")).rejects.toThrow("[gherkin-io] [write] document must be set!");
+            await expect (write("path")).rejects.toThrow("Document must be set!");
         });
 
         test("should write feature file", async () => {

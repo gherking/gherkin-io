@@ -6,10 +6,14 @@ import { sync } from "glob";
 import { resolve } from "path";
 import { Readable } from "stream";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require("debug")("gherkin-io");
+
 export { FormatOptions } from "gherkin-formatter";
 export { Document } from "gherkin-ast";
 
 const readFile = (path: string): Promise<GherkinDocument> => {
+    debug("readFile(path: %s)", path);
     return new Promise<GherkinDocument>((fulfill, reject) => {
         const stream: Readable = gherkin.fromPaths([path], {
             includeGherkinDocument: true,
@@ -22,16 +26,18 @@ const readFile = (path: string): Promise<GherkinDocument> => {
 };
 
 export const read = async (pattern: string): Promise<Document[]> => {
+    debug("read(pattern: %s)", pattern);
     if (!pattern) {
-        throw new Error("[gherkin-io] [read] pattern must be set!");
+        throw new Error("Pattern must be set!");
     }
     const files: string[] = sync(pattern, {
         dot: true,
         nosort: true,
         matchBase: false,
     });
+    debug("read -> files: %o", files);
     if (!files.length) {
-        throw new Error(`[gherkin-io] [read] No matching files for the given pattern: ${pattern}`);
+        throw new Error(`No matching files for the given pattern: ${pattern}`);
     }
     const documents: Document[] = [];
     for (const file of files) {
@@ -39,18 +45,19 @@ export const read = async (pattern: string): Promise<Document[]> => {
             const gDocument: GherkinDocument = await readFile(file);
             documents.push(Document.parse(gDocument));
         } catch (e) {
-            console.warn(`[gherkin-io] [read] Not valid feature file: ${file}\n`, e);
+            console.warn(`Not valid feature file: ${file}\n`, e);
         }
     }
     return documents;
 };
 
 export const write = async (filePath: string, document: Document, options?: FormatOptions): Promise<void> => {
+    debug("write(filePath: %s, document: %s, options: %o)", filePath, document?.constructor.name, options);
     if (!filePath) {
-        throw new Error("[gherkin-io] [write] path must be set!");
+        throw new Error("Path must be set!");
     }
     if (!document) {
-        throw new Error("[gherkin-io] [write] document must be set!");
+        throw new Error("Document must be set!");
     }
     await writeFile(
         resolve(filePath),
