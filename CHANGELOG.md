@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.0.0 - TBD
+## 1.0.1 - 2021-03-25
+
+_Technical release_
+
+## 1.0.0 - 2021-03-25
 
 ### Added
 
