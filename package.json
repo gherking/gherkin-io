@@ -22,8 +22,7 @@
     "Gherkin",
     "Feature",
     "Scenario",
-    "Scenario",
-    "Outline",
+    "Scenario Outline",
     "Background",
     "Step",
     "Examples"
