@@ -41,6 +41,8 @@ describe("gherkin-io", () => {
 
         test("should write feature file", async () => {
             jest.spyOn(formatter, "format").mockReturnValue("FEATURE");
+            jest.spyOn(fs, "existsSync").mockReturnValue(true);
+            jest.spyOn(fs, "mkdirpSync").mockReturnValue();
             // @ts-ignore
             jest.spyOn(fs, "writeFile").mockResolvedValue();
 
@@ -52,8 +54,32 @@ describe("gherkin-io", () => {
             await write("path.feature", document, options);
 
             expect(formatter.format).toHaveBeenCalledWith(document, options);
+            expect(fs.mkdirpSync).not.toHaveBeenCalled();
             expect(fs.writeFile).toHaveBeenCalledWith(
                 expect.stringMatching(/path\.feature$/),
+                "FEATURE",
+                "utf8",
+            );
+        });
+
+        test("should write feature file to non-existing folder", async () => {
+            jest.spyOn(formatter, "format").mockReturnValue("FEATURE");
+            jest.spyOn(fs, "existsSync").mockReturnValue(false);
+            jest.spyOn(fs, "mkdirpSync").mockReturnValue();
+            // @ts-ignore
+            jest.spyOn(fs, "writeFile").mockResolvedValue();
+
+            const document: Document = new Document("uri");
+            const options: FormatOptions = {
+                lineBreak: "\r\n",
+                indentation: "  ",
+            };
+            await write("folder/path.feature", document, options);
+
+            expect(formatter.format).toHaveBeenCalledWith(document, options);
+            expect(fs.mkdirpSync).toHaveBeenCalledWith(expect.stringMatching(/folder$/));
+            expect(fs.writeFile).toHaveBeenCalledWith(
+                expect.stringMatching(/folder[\\/]path\.feature$/),
                 "FEATURE",
                 "utf8",
             );

@@ -1,9 +1,9 @@
-import { writeFile } from "fs-extra";
+import { writeFile, existsSync, mkdirpSync } from "fs-extra";
 import gherkin from "gherkin";
 import { Document, GherkinDocument } from "gherkin-ast";
 import { format, FormatOptions } from "gherkin-formatter";
 import { sync } from "glob";
-import { resolve } from "path";
+import { resolve, dirname } from "path";
 import { Readable } from "stream";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -58,6 +58,11 @@ export const write = async (filePath: string, document: Document, options?: Form
     }
     if (!document) {
         throw new Error("Document must be set!");
+    }
+    filePath = resolve(filePath);
+    const folder = dirname(filePath);
+    if (!existsSync(folder)) {
+        mkdirpSync(folder);
     }
     await writeFile(
         resolve(filePath),

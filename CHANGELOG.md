@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 - 2021-03-25
+
+Fixed issue when saving to new folder
+
 ## 1.0.2 - 2021-03-25
 
 **Final release**
