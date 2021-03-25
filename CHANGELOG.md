@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2 - 2021-03-25
+
+**Final release**
+
 ## 1.0.1 - 2021-03-25
 
 _Technical release_
