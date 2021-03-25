@@ -6,11 +6,11 @@ describe("gherkin-io", () => {
     describe("read", () => {
         test("should handle missing pattern", async () => {
             // @ts-ignore
-            await expect (read()).rejects.toThrow("Pattern must be set!");
+            await expect(read()).rejects.toThrow("Pattern must be set!");
         });
 
         test("should handle if no match for pattern", async () => {
-            await expect (read("no-file-match")).rejects.toThrow("No matching files for the given pattern: no-file-match");
+            await expect(read("no-file-match")).rejects.toThrow("No matching files for the given pattern: no-file-match");
         });
 
         test("should parse feature files", async () => {
@@ -31,12 +31,12 @@ describe("gherkin-io", () => {
     describe("write", () => {
         test("should handle missing path", async () => {
             // @ts-ignore
-            await expect (write()).rejects.toThrow("Path must be set!");
+            await expect(write()).rejects.toThrow("Path must be set!");
         });
 
         test("should handle missing document", async () => {
             // @ts-ignore
-            await expect (write("path")).rejects.toThrow("Document must be set!");
+            await expect(write("path")).rejects.toThrow("Document must be set!");
         });
 
         test("should write feature file", async () => {
