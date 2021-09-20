@@ -1,4 +1,5 @@
 import * as fs from "fs-extra";
+import { Rule } from "gherkin-ast";
 import * as formatter from "gherkin-formatter";
 import { Document, FormatOptions, read, write } from "../src";
 
@@ -14,18 +15,24 @@ describe("gherkin-io", () => {
         });
 
         test("should parse feature files", async () => {
-            const documents: Document[] = await read("**/test*.feature");
+            const documents: Document[] = await read("tests/**/test*.feature");
             expect(documents).toHaveLength(2);
             expect(documents[0].uri).toContain("test.feature");
             expect(documents[1].uri).toContain("test2.feature");
         });
 
         test("should handle if error happens during parse", async () => {
-            const documents: Document[] = await read("**/*.feature");
+            const documents: Document[] = await read("tests/**/*.feature");
             expect(documents).toHaveLength(2);
             expect(documents[0].uri).toContain("test.feature");
             expect(documents[1].uri).toContain("test2.feature");
         });
+        
+        test("should handle Rule tags", async () => {
+            const documents: Document[] = await read("tests/**/test*.feature");
+            expect(documents).toHaveLength(2);
+            expect((documents[0].feature.elements[0] as Rule).tags[0].toString()).toEqual('@test')
+        })
     });
 
     describe("write", () => {

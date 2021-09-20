@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0 - 2021-09-20
+
+Upgraded to latest gherkin (`gherkin` -> `@cucumber/gherkin-streams`)
+
 ## 1.0.3 - 2021-03-25
 
 Fixed issue when saving to new folder

@@ -1,5 +1,5 @@
 import { writeFile, existsSync, mkdirpSync } from "fs-extra";
-import gherkin from "gherkin";
+import { GherkinStreams } from "@cucumber/gherkin-streams";
 import { Document, GherkinDocument } from "gherkin-ast";
 import { format, FormatOptions } from "gherkin-formatter";
 import { sync } from "glob";
@@ -15,7 +15,7 @@ export { Document } from "gherkin-ast";
 const readFile = (path: string): Promise<GherkinDocument> => {
     debug("readFile(path: %s)", path);
     return new Promise<GherkinDocument>((fulfill, reject) => {
-        const stream: Readable = gherkin.fromPaths([path], {
+        const stream: Readable = GherkinStreams.fromPaths([path], {
             includeGherkinDocument: true,
             includePickles: false,
             includeSource: false,
