@@ -28,11 +28,15 @@ describe("gherkin-io", () => {
             expect(documents[1].uri).toContain("test2.feature");
         });
         
-        test("should handle Rule tags", async () => {
+        test("should handle Rules", async () => {
             const documents: Document[] = await read("tests/**/test*.feature");
             expect(documents).toHaveLength(2);
-            expect((documents[0].feature.elements[0] as Rule).tags[0].toString()).toEqual('@test')
-        })
+            expect(documents[0].feature.elements).toHaveLength(1);
+
+            const rule = documents[0].feature.elements[0] as Rule;
+            expect(rule.tags[0].toString()).toEqual('@test');
+            expect(rule.elements).toHaveLength(3);
+        });
     });
 
     describe("write", () => {

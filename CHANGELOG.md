@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1 - 2021-11-30
+
+ - Updated dependencies
+ - Added test to ensure correct rule processinggit 
+
 ## 1.1.0 - 2021-09-20
 
 Upgraded to latest gherkin (`gherkin` -> `@cucumber/gherkin-streams`)
