@@ -2,7 +2,8 @@
 
 ## 1.1.3 - 2022-10-18
 
-Updated dependencies
+- Updated dependencies
+- Fixed windows paths
 
 ## 1.1.2 - 2022-01-10
 

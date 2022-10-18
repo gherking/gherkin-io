@@ -30,6 +30,8 @@ export const read = async (pattern: string): Promise<Document[]> => {
     if (!pattern) {
         throw new Error("Pattern must be set!");
     }
+    // Denormalizing Windows paths
+    pattern = pattern.replace(/\\/g, '/');
     const files: string[] = sync(pattern, {
         dot: true,
         nosort: true,
