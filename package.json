@@ -63,7 +63,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@cucumber/gherkin-streams": "^5.0.1",
+    "@cucumber/gherkin-streams": "^4.0.0",
     "debug": "^4.3.4",
     "fs-extra": "^10.1.0",
     "gherkin-ast": "^3.3.1",
