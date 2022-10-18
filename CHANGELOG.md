@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3 - 2022-10-18
+
+Updated dependencies
+
 ## 1.1.2 - 2022-01-10
 
 Fixed "colors issue"
