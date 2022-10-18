@@ -2,6 +2,7 @@ import * as fs from "fs-extra";
 import { Rule } from "gherkin-ast";
 import * as formatter from "gherkin-formatter";
 import { Document, FormatOptions, read, write } from "../src";
+import { normalize } from "path";
 
 describe("gherkin-io", () => {
     describe("read", () => {
@@ -27,7 +28,7 @@ describe("gherkin-io", () => {
             expect(documents[0].uri).toContain("test.feature");
             expect(documents[1].uri).toContain("test2.feature");
         });
-        
+
         test("should handle Rules", async () => {
             const documents: Document[] = await read("tests/**/test*.feature");
             expect(documents).toHaveLength(2);
@@ -37,6 +38,13 @@ describe("gherkin-io", () => {
             expect(rule.tags[0].toString()).toEqual('@test');
             expect(rule.elements).toHaveLength(3);
         });
+
+        test("should handle normalized path", async () => {
+            const documents: Document[] = await read(normalize("tests/**/test*.feature"));
+            expect(documents).toHaveLength(2);
+            expect(documents[0].uri).toContain("test.feature");
+            expect(documents[1].uri).toContain("test2.feature");
+        })
     });
 
     describe("write", () => {
