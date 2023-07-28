@@ -60,9 +60,8 @@ export const read = async (pattern: string): Promise<Document[]> => {
     pattern = pattern.replace(/\\/g, '/');
     const files: string[] = sync(pattern, {
         dot: true,
-        nosort: true,
         matchBase: false,
-    });
+    }).sort();
     debug("read -> files: %o", files);
     if (!files.length) {
         throw new Error(`No matching files for the given pattern: ${pattern}`);
