@@ -1,5 +1,6 @@
 import { writeFile, existsSync, mkdirpSync } from "fs-extra";
 import { GherkinStreams } from "@cucumber/gherkin-streams";
+import { makeSourceEnvelope } from "@cucumber/gherkin";
 import { Document, GherkinDocument } from "gherkin-ast";
 import { format, FormatOptions } from "gherkin-formatter";
 import { sync } from "glob";
@@ -23,6 +24,31 @@ const readFile = (path: string): Promise<GherkinDocument> => {
         stream.on("data", fulfill);
         stream.on("error", reject);
     });
+};
+
+const parseContent = (content: string, uri: string): Promise<GherkinDocument> => {
+    debug("parseContent(content.length: %d)", content?.length);
+    return new Promise<GherkinDocument>((fulfill, reject) => {
+        const stream: Readable = GherkinStreams.fromSources([makeSourceEnvelope(content, uri)], {
+            includeGherkinDocument: true,
+            includePickles: false,
+            includeSource: false,
+        });
+        stream.on("data", fulfill);
+        stream.on("error", reject);
+    });
+};
+
+export const parse = async (content: string, uri: string): Promise<Document> => {
+    debug("parse(content.length: %d, uri: %d)", content?.length, uri);
+    if (!content) {
+        throw new Error("Content must be set!");
+    }
+    if (!uri) {
+        throw new Error("URI must be set!");
+    }
+    const gDocument: GherkinDocument = await parseContent(content, uri);
+    return Document.parse(gDocument);
 };
 
 export const read = async (pattern: string): Promise<Document[]> => {

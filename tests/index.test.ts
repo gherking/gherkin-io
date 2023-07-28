@@ -1,10 +1,36 @@
 import * as fs from "fs-extra";
 import { Rule } from "gherkin-ast";
 import * as formatter from "gherkin-formatter";
-import { Document, FormatOptions, read, write } from "../src";
+import { Document, FormatOptions, read, write, parse } from "../src";
 import { normalize } from "path";
 
 describe("gherkin-io", () => {
+    describe("parse", () => {
+        test("should handle missing content", async () => {
+            // @ts-ignore
+            await expect(parse()).rejects.toThrow("Content must be set!");
+        });
+
+        test("should handle missing URI", async () => {
+            // @ts-ignore
+            await expect(parse("Feature: Test")).rejects.toThrow("URI must be set!");
+        });
+
+        test("should handle empty content", async () => {
+            await expect(parse("", "")).rejects.toThrow("Content must be set!");
+        });
+
+        test("should handle empty URI", async () => {
+            await expect(parse("Feature: Test", "")).rejects.toThrow("URI must be set!");
+        });
+
+        test("should parse feature file with URI", async () => {
+            const document: Document = await parse(fs.readFileSync("./tests/data/test.feature", "utf-8"), "uri.feature");
+            expect(document.feature.name).toBe('Test');
+            expect(document.uri).toBe('uri.feature');
+        });
+    });
+
     describe("read", () => {
         test("should handle missing pattern", async () => {
             // @ts-ignore

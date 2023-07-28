@@ -3,12 +3,33 @@
 ![Downloads](https://img.shields.io/npm/dw/gherkin-io?style=flat-square)
 ![Version@npm](https://img.shields.io/npm/v/gherkin-io?label=version%40npm&style=flat-square)
 ![Version@git](https://img.shields.io/github/package-json/v/gherking/gherkin-io/master?label=version%40git&style=flat-square)
-![CI](https://img.shields.io/github/workflow/status/gherking/gherkin-io/CI/master?label=ci&style=flat-square)
-![Docs](https://img.shields.io/github/workflow/status/gherking/gherkin-io/Docs/master?label=docs&style=flat-square)
+![CI](https://img.shields.io/github/actions/workflow/status/gherking/gherkin-io/ci.yml?branch=master&label=ci&style=flat-square)
+![Docs](https://img.shields.io/github/actions/workflow/status/gherking/gherkin-io/docs.yml?branch=master&label=docs&style=flat-square)
 
-Tool to read/write GHerkin feature files and work with Gherking AST
+Tool to read/write Gherkin feature files and work with Gherking AST
 
 ## Usage
+
+### Parse feature string
+
+The `parse` function can be used to parse feature file content to [AST](https://github.com/gherking/gherkin-io).
+
+```typescript
+parse(content: string, uri: string): Promise<Document>
+```
+
+In TypeScript:
+```typescript
+import {parse, Document} from "gherkin-io";
+
+const document: Document = await parse("Feature: Test\n...", "./features/test.feature");
+```
+
+In JavaScript:
+```javascript
+const {parse} = require("gherkin-io");
+const document = await read("Feature: Test\n...", "./features/test.feature");
+```
 
 ### Read feature files
 
