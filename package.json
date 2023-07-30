@@ -1,7 +1,7 @@
 {
   "name": "gherkin-io",
   "version": "1.2.0",
-  "description": "Tool to read/write GHerkin feature files and work with Gherking AST",
+  "description": "Tool to read/write Gherkin feature files and work with Gherking AST",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
