@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0 - 2023-07-29
+
+- Added `parse`
+- Updated dependencies
+- Fixed badge
+
 ## 1.1.3 - 2022-10-18
 
 - Updated dependencies
