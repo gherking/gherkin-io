@@ -2,6 +2,9 @@ name: Release
 on:
   release:
     types: [created]
+permissions:
+  contents: read
+  id-token: write
 jobs:
   call_npm_release:
     uses: szikszail/workflows/.github/workflows/npm-release.yml@v1
