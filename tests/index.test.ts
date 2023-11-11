@@ -28,6 +28,7 @@ describe("gherkin-io", () => {
             const document: Document = await parse(fs.readFileSync("./tests/data/test.feature", "utf-8"), "uri.feature");
             expect(document.feature.name).toBe('Test');
             expect(document.uri).toBe('uri.feature');
+            expect((document.feature.elements[0] as Rule).tags[0].value).toBe('abc');
         });
 
         test("should parse feature file with tag format", async () => {
