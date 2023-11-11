@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 - 2023-11-12
+
+- Upgraded to latest `gherkin-ast` and `gherkin-formatter`
+- Added `ParseConfig` to each functions
+
 ## 1.2.0 - 2023-07-29
 
 - Added `parse`

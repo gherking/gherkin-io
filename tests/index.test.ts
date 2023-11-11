@@ -1,8 +1,8 @@
 import * as fs from "fs-extra";
-import { Rule } from "gherkin-ast";
+import {Rule, Scenario, TagFormat} from "gherkin-ast";
 import * as formatter from "gherkin-formatter";
-import { Document, FormatOptions, read, write, parse } from "../src";
-import { normalize } from "path";
+import {Document, FormatOptions, parse, read, write} from "../src";
+import {normalize} from "path";
 
 describe("gherkin-io", () => {
     describe("parse", () => {
@@ -28,6 +28,16 @@ describe("gherkin-io", () => {
             const document: Document = await parse(fs.readFileSync("./tests/data/test.feature", "utf-8"), "uri.feature");
             expect(document.feature.name).toBe('Test');
             expect(document.uri).toBe('uri.feature');
+        });
+
+        test("should parse feature file with tag format", async () => {
+            const document: Document = await parse(
+                fs.readFileSync("./tests/data/test2.feature", "utf-8"),
+                "uri.feature",
+                {tagFormat: TagFormat.ASSIGNMENT}
+            );
+            expect(document.feature.name).toBe('Test');
+            expect((document.feature.elements[1] as Scenario).tags[0].value).toBe('abc');
         });
     });
 
@@ -61,7 +71,8 @@ describe("gherkin-io", () => {
             expect(documents[0].feature.elements).toHaveLength(1);
 
             const rule = documents[0].feature.elements[0] as Rule;
-            expect(rule.tags[0].toString()).toEqual('@test');
+            expect(rule.tags[0].name).toEqual('test');
+            expect(rule.tags[0].value).toEqual('abc');
             expect(rule.elements).toHaveLength(3);
         });
 

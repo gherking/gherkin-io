@@ -1,7 +1,7 @@
 import { writeFile, existsSync, mkdirpSync } from "fs-extra";
 import { GherkinStreams } from "@cucumber/gherkin-streams";
 import { makeSourceEnvelope } from "@cucumber/gherkin";
-import { Document, GherkinDocument } from "gherkin-ast";
+import {Document, GherkinDocument, ParseConfig, config as parseConfig} from "gherkin-ast";
 import { format, FormatOptions } from "gherkin-formatter";
 import { sync } from "glob";
 import { resolve, dirname } from "path";
@@ -39,7 +39,7 @@ const parseContent = (content: string, uri: string): Promise<GherkinDocument> =>
     });
 };
 
-export const parse = async (content: string, uri: string): Promise<Document> => {
+export const parse = async (content: string, uri: string, config?: ParseConfig): Promise<Document> => {
     debug("parse(content.length: %d, uri: %d)", content?.length, uri);
     if (!content) {
         throw new Error("Content must be set!");
@@ -47,11 +47,12 @@ export const parse = async (content: string, uri: string): Promise<Document> => 
     if (!uri) {
         throw new Error("URI must be set!");
     }
+    parseConfig.set(config);
     const gDocument: GherkinDocument = await parseContent(content, uri);
     return Document.parse(gDocument);
 };
 
-export const read = async (pattern: string): Promise<Document[]> => {
+export const read = async (pattern: string, config?: ParseConfig): Promise<Document[]> => {
     debug("read(pattern: %s)", pattern);
     if (!pattern) {
         throw new Error("Pattern must be set!");
@@ -66,6 +67,7 @@ export const read = async (pattern: string): Promise<Document[]> => {
     if (!files.length) {
         throw new Error(`No matching files for the given pattern: ${pattern}`);
     }
+    parseConfig.set(config);
     const documents: Document[] = [];
     for (const file of files) {
         try {
