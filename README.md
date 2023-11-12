@@ -15,20 +15,31 @@ Tool to read/write Gherkin feature files and work with Gherking AST
 The `parse` function can be used to parse feature file content to [AST](https://github.com/gherking/gherkin-io).
 
 ```typescript
-parse(content: string, uri: string): Promise<Document>
+function parse(content: string, uri: string): Promise<Document>
 ```
 
 In TypeScript:
+
 ```typescript
 import {parse, Document} from "gherkin-io";
+import {TagFormat} from "gherkin-ast";
 
-const document: Document = await parse("Feature: Test\n...", "./features/test.feature");
+const document: Document = await parse(
+    "Feature: Test\n...",
+    "./features/test.feature",
+    {tagFormat: TagFormat.FUNCTIONAL} // default
+);
 ```
 
 In JavaScript:
 ```javascript
 const {parse} = require("gherkin-io");
-const document = await read("Feature: Test\n...", "./features/test.feature");
+const {TagFormat} = require("gherkin-ast");
+const document = await read(
+    "Feature: Test\n...", 
+    "./features/test.feature", 
+    {tagFormat: TagFormat.FUNCTIONAL} // default
+);
 ```
 
 ### Read feature files
@@ -36,20 +47,28 @@ const document = await read("Feature: Test\n...", "./features/test.feature");
 The `read` function can be used to parse feature file(s) to [AST](https://github.com/gherking/gherkin-io).
 
 ```typescript
-read(pattern: string): Promise<Document[]>
+function read(pattern: string): Promise<Document[]>
 ```
 
 In TypeScript:
 ```typescript
 import {read, Document} from "gherkin-io";
+import {TagFormat} from "gherkin-ast";
 
-const documents: Document[] = await read("./features/*.feature");
+const documents: Document[] = await read(
+    "./features/*.feature",
+    {tagFormat: TagFormat.FUNCTIONAL} // default
+);
 ```
 
 In JavaScript:
 ```javascript
 const {read} = require("gherkin-io");
-const documents = await read("./features/*.feature");
+const {TagFormat} = require("gherkin-ast");
+const documents = await read(
+    "./features/*.feature",
+    {tagFormat: TagFormat.FUNCTIONAL} // default
+);
 ```
 
 ### Write feature files
@@ -57,7 +76,7 @@ const documents = await read("./features/*.feature");
 The `write` function can be used to write an AST to a feature file.
 
 ```typescript
-write(filePath: string, document: Document, options?: FormatterOptions): Promise<void>
+function write(filePath: string, document: Document, options?: FormatterOptions): Promise<void>
 ```
 
 In TypeScript:

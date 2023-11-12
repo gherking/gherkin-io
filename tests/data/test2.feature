@@ -7,7 +7,7 @@ Feature: Test
         When test
         Then test
 
-    @tag
+    @tag=abc
     Scenario: Test
         Given test
         When test

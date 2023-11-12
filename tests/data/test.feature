@@ -1,7 +1,7 @@
 Feature: Test
     Feature description
 
-    @test
+    @test(abc)
     Rule: Test
         Background: Test
             Given test
